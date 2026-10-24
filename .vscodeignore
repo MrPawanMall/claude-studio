@@ -1,0 +1,11 @@
+.github/**
+.vscode/**
+test/**
+scripts/**
+src/**
+node_modules/**
+dist/**/*.map
+.gitignore
+PUBLISHING.md
+**/*.vsix
+RELEASE_NOTES.md

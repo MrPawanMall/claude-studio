@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Claude Studio by PM — sftp.json",
+  "definitions": {
+    "server": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name shown in Claude Studio." },
+        "context": { "type": "string", "description": "Sub-folder of the project this server maps to." },
+        "protocol": { "type": "string", "enum": ["sftp", "ftp"], "default": "sftp" },
+        "host": { "type": "string" },
+        "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
+        "username": { "type": "string" },
+        "password": { "type": "string", "description": "Not recommended: stored as plain text. Leave it out and Claude Studio keeps it in secure storage." },
+        "privateKeyPath": { "type": "string", "description": "Path to your SSH private key (SFTP)." },
+        "passphrase": { "type": ["string", "boolean"], "description": "true = ask once and keep in secure storage." },
+        "agent": { "type": "string", "description": "SSH agent socket / pipe (e.g. pageant on Windows)." },
+        "secure": { "type": ["boolean", "string"], "enum": [true, false, "implicit"], "description": "FTP only: use FTPS (TLS)." },
+        "remotePath": { "type": "string", "default": "/" },
+        "uploadOnSave": { "type": "boolean", "default": false },
+        "ignore": { "type": "array", "items": { "type": "string" } },
+        "connectTimeout": { "type": "integer" },
+        "profiles": { "type": "object", "additionalProperties": { "type": "object" } },
+        "defaultProfile": { "type": "string" }
+      },
+      "required": ["host"]
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/definitions/server" },
+    { "type": "array", "items": { "$ref": "#/definitions/server" } }
+  ]
+}

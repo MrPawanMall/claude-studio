@@ -1,0 +1,1225 @@
+{
+  "name": "claude-studio",
+  "displayName": "Claude Studio by PM",
+  "description": "All-in-one companion for the Claude agent: auto-open edited files, review diffs, undo tasks, built-in SFTP/FTP upload, usage & cost tracker, skills manager and notifications with sounds.",
+  "version": "2.0.0",
+  "publisher": "pawanmall",
+  "author": {
+    "name": "Pawan Mall",
+    "email": "pawan.webmaster@gmail.com",
+    "url": "https://www.pawanmall.in"
+  },
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1E1B2E",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/MrPawanMall/claude-studio#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrPawanMall/claude-studio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MrPawanMall/claude-studio/issues",
+    "email": "pawan.webmaster@gmail.com"
+  },
+  "qna": "https://github.com/MrPawanMall/claude-studio/discussions",
+  "pricing": "Free",
+  "sponsor": {
+    "url": "https://www.webdevservices.in/"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "AI",
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "claude",
+    "claude code",
+    "ai agent",
+    "antigravity",
+    "auto open",
+    "diff",
+    "undo",
+    "sftp",
+    "ftp",
+    "upload",
+    "usage",
+    "cost",
+    "skills",
+    "notifications",
+    "php"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In untrusted folders Claude Studio still opens and tracks Claude's edits, but server uploads, PHP checks, live reload and project skill installs stay off until you trust the folder.",
+      "restrictedConfigurations": [
+        "claudeStudio.upload.claudeEdits",
+        "claudeStudio.upload.confirmProfiles",
+        "claudeStudio.liveReload.enabled",
+        "claudeStudio.liveReload.port",
+        "claudeStudio.liveReload.watch"
+      ]
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudeStudio.autoOpen.menu",
+        "title": "Quick Menu",
+        "category": "Claude Studio",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "claudeStudio.autoOpen.toggle",
+        "title": "Turn Auto-Open On/Off",
+        "category": "Claude Studio"
+      },
+      {
+        "command": "claudeStudio.autoOpen.toggleProject",
+        "title": "Turn Auto-Open On/Off for This Project",
+        "category": "Claude Studio"
+      },
+      {
+        "command": "claudeStudio.autoOpen.pause",
+        "title": "Pause Auto-Open…",
+        "category": "Claude Studio",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "claudeStudio.autoOpen.resume",
+        "title": "Resume Auto-Open",
+        "category": "Claude Studio",
+        "icon": "$(debug-continue)"
+      },
+      {
+        "command": "claudeStudio.autoOpen.closeOpenedTabs",
+        "title": "Close Tabs Opened by Claude Studio",
+        "category": "Claude Studio",
+        "icon": "$(close-all)"
+      },
+      {
+        "command": "claudeStudio.changes.diff",
+        "title": "Show What Claude Changed",
+        "category": "Claude Studio",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "claudeStudio.changes.diffTask",
+        "title": "Show All Changes Since Task Start",
+        "category": "Claude Studio",
+        "icon": "$(diff-multiple)"
+      },
+      {
+        "command": "claudeStudio.changes.undo",
+        "title": "Undo Claude's Edit to This File",
+        "category": "Claude Studio",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "claudeStudio.changes.revertTask",
+        "title": "Undo Whole Claude Task",
+        "category": "Claude Studio",
+        "icon": "$(history)"
+      },
+      {
+        "command": "claudeStudio.changes.checkpoint",
+        "title": "Create Checkpoint",
+        "category": "Claude Studio",
+        "icon": "$(bookmark)"
+      },
+      {
+        "command": "claudeStudio.changes.revertCheckpoint",
+        "title": "Revert to Checkpoint",
+        "category": "Claude Studio",
+        "icon": "$(debug-step-back)"
+      },
+      {
+        "command": "claudeStudio.changes.deleteCheckpoint",
+        "title": "Delete Checkpoint",
+        "category": "Claude Studio",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "claudeStudio.changes.copySummary",
+        "title": "Copy Task Summary",
+        "category": "Claude Studio",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "claudeStudio.changes.markReviewed",
+        "title": "Mark as Reviewed",
+        "category": "Claude Studio",
+        "icon": "$(check)"
+      },
+      {
+        "command": "claudeStudio.changes.markAllReviewed",
+        "title": "Mark All as Reviewed",
+        "category": "Claude Studio",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "claudeStudio.changes.clear",
+        "title": "Clear Change History",
+        "category": "Claude Studio",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "claudeStudio.changes.uploadTask",
+        "title": "Upload Task's Files",
+        "category": "Claude Studio",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "claudeStudio.upload.file",
+        "title": "Upload to Server",
+        "category": "Claude Studio",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "claudeStudio.upload.download",
+        "title": "Download from Server",
+        "category": "Claude Studio",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "claudeStudio.upload.compare",
+        "title": "Compare with Server",
+        "category": "Claude Studio",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "claudeStudio.upload.switchProfile",
+        "title": "Switch Server Profile",
+        "category": "Claude Studio",
+        "icon": "$(server-environment)"
+      },
+      {
+        "command": "claudeStudio.upload.createConfig",
+        "title": "Set Up Server (sftp.json)",
+        "category": "Claude Studio",
+        "icon": "$(add)"
+      },
+      {
+        "command": "claudeStudio.upload.openConfig",
+        "title": "Open sftp.json",
+        "category": "Claude Studio",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "claudeStudio.upload.movePasswords",
+        "title": "Move Passwords to Secure Storage",
+        "category": "Claude Studio",
+        "icon": "$(lock)"
+      },
+      {
+        "command": "claudeStudio.upload.forgetPassword",
+        "title": "Forget Saved Server Password",
+        "category": "Claude Studio",
+        "icon": "$(key)"
+      },
+      {
+        "command": "claudeStudio.upload.forgetHostKey",
+        "title": "Forget Server Key",
+        "category": "Claude Studio"
+      },
+      {
+        "command": "claudeStudio.upload.retry",
+        "title": "Retry Upload",
+        "category": "Claude Studio",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "claudeStudio.upload.retryFailed",
+        "title": "Retry Failed Uploads",
+        "category": "Claude Studio",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "claudeStudio.upload.clear",
+        "title": "Clear Upload History",
+        "category": "Claude Studio",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "claudeStudio.usage.dashboard",
+        "title": "Open Usage Dashboard",
+        "category": "Claude Studio",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "claudeStudio.usage.refresh",
+        "title": "Refresh Usage",
+        "category": "Claude Studio",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "claudeStudio.usage.enablePlanLimits",
+        "title": "Show 5h / 7d Plan Usage",
+        "category": "Claude Studio",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "claudeStudio.skills.browse",
+        "title": "Browse Skills…",
+        "category": "Claude Studio",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "claudeStudio.skills.addSource",
+        "title": "Add Skill Source…",
+        "category": "Claude Studio",
+        "icon": "$(add)"
+      },
+      {
+        "command": "claudeStudio.skills.removeSource",
+        "title": "Remove Skill Source",
+        "category": "Claude Studio",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "claudeStudio.skills.create",
+        "title": "Create New Skill…",
+        "category": "Claude Studio",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "claudeStudio.skills.toggle",
+        "title": "Enable / Disable Skill",
+        "category": "Claude Studio",
+        "icon": "$(circle-slash)"
+      },
+      {
+        "command": "claudeStudio.skills.remove",
+        "title": "Delete Skill",
+        "category": "Claude Studio",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "claudeStudio.skills.reveal",
+        "title": "Reveal Skill Folder",
+        "category": "Claude Studio",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "claudeStudio.skills.checkUpdates",
+        "title": "Check Skills for Updates",
+        "category": "Claude Studio",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "claudeStudio.skills.setGithubToken",
+        "title": "Set GitHub Token for Skills",
+        "category": "Claude Studio",
+        "icon": "$(key)"
+      },
+      {
+        "command": "claudeStudio.skills.installZip",
+        "title": "Install Skill from .zip File…",
+        "category": "Claude Studio",
+        "icon": "$(file-zip)"
+      },
+      {
+        "command": "claudeStudio.skills.refresh",
+        "title": "Refresh Skills",
+        "category": "Claude Studio",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "claudeStudio.notifications.clear",
+        "title": "Clear Notifications",
+        "category": "Claude Studio",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "claudeStudio.notifications.markAllRead",
+        "title": "Mark Notifications Read",
+        "category": "Claude Studio",
+        "icon": "$(check-all)"
+      },
+      {
+        "command": "claudeStudio.notifications.chooseSound",
+        "title": "Change Notification Sounds…",
+        "category": "Claude Studio",
+        "icon": "$(unmute)"
+      },
+      {
+        "command": "claudeStudio.notifications.testSound",
+        "title": "Test Notification Sound",
+        "category": "Claude Studio",
+        "icon": "$(play)"
+      },
+      {
+        "command": "claudeStudio.notifications.resetSounds",
+        "title": "Reset Sounds to Default",
+        "category": "Claude Studio",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "claudeStudio.notifications.toggleDnd",
+        "title": "Do Not Disturb On/Off",
+        "category": "Claude Studio",
+        "icon": "$(bell-slash)"
+      },
+      {
+        "command": "claudeStudio.notifications.runAction",
+        "title": "Open Notification",
+        "category": "Claude Studio"
+      },
+      {
+        "command": "claudeStudio.liveReload.copySnippet",
+        "title": "Copy Live Reload Script Tag",
+        "category": "Claude Studio",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "claudeStudio.openSettings",
+        "title": "Settings",
+        "category": "Claude Studio",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "claudeStudio.showLog",
+        "title": "Show Log",
+        "category": "Claude Studio",
+        "icon": "$(output)"
+      },
+      {
+        "command": "claudeStudio.about",
+        "title": "About Claude Studio by PM",
+        "category": "Claude Studio",
+        "icon": "$(info)"
+      },
+      {
+        "command": "claudeStudio.changes.openFile",
+        "title": "Open File",
+        "category": "Claude Studio",
+        "icon": "$(go-to-file)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "claudeStudio.notifications.runAction",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.changes.openFile",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.changes.deleteCheckpoint",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.upload.retry",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.skills.toggle",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.skills.remove",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.skills.reveal",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.skills.removeSource",
+          "when": "false"
+        },
+        {
+          "command": "claudeStudio.upload.file",
+          "when": "workspaceTrusted"
+        },
+        {
+          "command": "claudeStudio.upload.download",
+          "when": "workspaceTrusted"
+        },
+        {
+          "command": "claudeStudio.upload.compare",
+          "when": "workspaceTrusted"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "claudeStudio.changes.checkpoint",
+          "when": "view == claudeStudio.changes",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeStudio.changes.markAllReviewed",
+          "when": "view == claudeStudio.changes",
+          "group": "navigation@2"
+        },
+        {
+          "command": "claudeStudio.autoOpen.menu",
+          "when": "view == claudeStudio.changes",
+          "group": "navigation@3"
+        },
+        {
+          "command": "claudeStudio.changes.clear",
+          "when": "view == claudeStudio.changes",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.autoOpen.closeOpenedTabs",
+          "when": "view == claudeStudio.changes",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.about",
+          "when": "view == claudeStudio.changes",
+          "group": "3_about"
+        },
+        {
+          "command": "claudeStudio.upload.retryFailed",
+          "when": "view == claudeStudio.uploads",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeStudio.upload.switchProfile",
+          "when": "view == claudeStudio.uploads",
+          "group": "navigation@2"
+        },
+        {
+          "command": "claudeStudio.upload.openConfig",
+          "when": "view == claudeStudio.uploads",
+          "group": "navigation@3"
+        },
+        {
+          "command": "claudeStudio.upload.clear",
+          "when": "view == claudeStudio.uploads",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.upload.movePasswords",
+          "when": "view == claudeStudio.uploads",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.upload.forgetPassword",
+          "when": "view == claudeStudio.uploads",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.upload.forgetHostKey",
+          "when": "view == claudeStudio.uploads",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.usage.refresh",
+          "when": "view == claudeStudio.usage",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeStudio.usage.dashboard",
+          "when": "view == claudeStudio.usage",
+          "group": "navigation@2"
+        },
+        {
+          "command": "claudeStudio.skills.browse",
+          "when": "view == claudeStudio.skills",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeStudio.skills.create",
+          "when": "view == claudeStudio.skills",
+          "group": "navigation@2"
+        },
+        {
+          "command": "claudeStudio.skills.refresh",
+          "when": "view == claudeStudio.skills",
+          "group": "navigation@3"
+        },
+        {
+          "command": "claudeStudio.skills.addSource",
+          "when": "view == claudeStudio.skills",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.skills.installZip",
+          "when": "view == claudeStudio.skills",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.skills.checkUpdates",
+          "when": "view == claudeStudio.skills",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.skills.setGithubToken",
+          "when": "view == claudeStudio.skills",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.notifications.markAllRead",
+          "when": "view == claudeStudio.notifications",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeStudio.notifications.clear",
+          "when": "view == claudeStudio.notifications",
+          "group": "navigation@2"
+        },
+        {
+          "command": "claudeStudio.notifications.toggleDnd",
+          "when": "view == claudeStudio.notifications",
+          "group": "navigation@3"
+        },
+        {
+          "command": "claudeStudio.notifications.chooseSound",
+          "when": "view == claudeStudio.notifications",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.notifications.testSound",
+          "when": "view == claudeStudio.notifications",
+          "group": "2_more"
+        },
+        {
+          "command": "claudeStudio.notifications.resetSounds",
+          "when": "view == claudeStudio.notifications",
+          "group": "2_more"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "claudeStudio.changes.diff",
+          "when": "view == claudeStudio.changes && viewItem == changeFile",
+          "group": "inline@1"
+        },
+        {
+          "command": "claudeStudio.changes.undo",
+          "when": "view == claudeStudio.changes && viewItem =~ /^changeFile/",
+          "group": "inline@3"
+        },
+        {
+          "command": "claudeStudio.upload.file",
+          "when": "view == claudeStudio.changes && viewItem =~ /^changeFile/ && claudeStudio.hasUploadConfig",
+          "group": "inline@2"
+        },
+        {
+          "command": "claudeStudio.changes.openFile",
+          "when": "view == claudeStudio.changes && viewItem =~ /^changeFile/",
+          "group": "1_open@1"
+        },
+        {
+          "command": "claudeStudio.changes.diffTask",
+          "when": "view == claudeStudio.changes && viewItem == changeFile",
+          "group": "1_open@2"
+        },
+        {
+          "command": "claudeStudio.changes.markReviewed",
+          "when": "view == claudeStudio.changes && viewItem =~ /^changeFile|task/",
+          "group": "2_review"
+        },
+        {
+          "command": "claudeStudio.changes.revertTask",
+          "when": "view == claudeStudio.changes && viewItem == task",
+          "group": "inline@2"
+        },
+        {
+          "command": "claudeStudio.changes.copySummary",
+          "when": "view == claudeStudio.changes && viewItem == task",
+          "group": "inline@1"
+        },
+        {
+          "command": "claudeStudio.changes.uploadTask",
+          "when": "view == claudeStudio.changes && viewItem == task && claudeStudio.hasUploadConfig",
+          "group": "3_upload"
+        },
+        {
+          "command": "claudeStudio.changes.revertCheckpoint",
+          "when": "view == claudeStudio.changes && viewItem == checkpoint",
+          "group": "inline@1"
+        },
+        {
+          "command": "claudeStudio.changes.deleteCheckpoint",
+          "when": "view == claudeStudio.changes && viewItem == checkpoint",
+          "group": "inline@2"
+        },
+        {
+          "command": "claudeStudio.upload.retry",
+          "when": "view == claudeStudio.uploads && viewItem == uploadFailed",
+          "group": "inline"
+        },
+        {
+          "command": "claudeStudio.upload.compare",
+          "when": "view == claudeStudio.uploads && viewItem =~ /^upload/",
+          "group": "1_actions"
+        },
+        {
+          "command": "claudeStudio.upload.download",
+          "when": "view == claudeStudio.uploads && viewItem =~ /^upload/",
+          "group": "1_actions"
+        },
+        {
+          "command": "claudeStudio.upload.switchProfile",
+          "when": "view == claudeStudio.uploads && viewItem == server",
+          "group": "inline"
+        },
+        {
+          "command": "claudeStudio.skills.toggle",
+          "when": "view == claudeStudio.skills && viewItem =~ /^skill(Tracked|Disabled)?$/",
+          "group": "inline@1"
+        },
+        {
+          "command": "claudeStudio.skills.remove",
+          "when": "view == claudeStudio.skills && viewItem =~ /^skill(Tracked|Disabled)?$/",
+          "group": "inline@2"
+        },
+        {
+          "command": "claudeStudio.skills.reveal",
+          "when": "view == claudeStudio.skills && viewItem =~ /^skill(Tracked|Disabled)?$/",
+          "group": "1_actions"
+        },
+        {
+          "command": "claudeStudio.skills.removeSource",
+          "when": "view == claudeStudio.skills && viewItem == skillSource",
+          "group": "inline"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "claudeStudio.changes.diff",
+          "when": "resourceScheme == file && resourcePath in claudeStudio.changedFiles",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "claudeStudio.upload.file",
+          "when": "resourceScheme == file && claudeStudio.hasUploadConfig",
+          "group": "claudeStudio"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "claudeStudio.changes.diff",
+          "when": "resourceScheme == file && resourcePath in claudeStudio.changedFiles",
+          "group": "claudeStudio@1"
+        },
+        {
+          "command": "claudeStudio.changes.undo",
+          "when": "resourceScheme == file && resourcePath in claudeStudio.changedFiles",
+          "group": "claudeStudio@2"
+        },
+        {
+          "command": "claudeStudio.upload.file",
+          "when": "resourceScheme == file && claudeStudio.hasUploadConfig",
+          "group": "claudeStudio@3"
+        },
+        {
+          "command": "claudeStudio.upload.compare",
+          "when": "resourceScheme == file && claudeStudio.hasUploadConfig",
+          "group": "claudeStudio@4"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "claudeStudio.upload.file",
+          "when": "claudeStudio.hasUploadConfig",
+          "group": "claudeStudio@1"
+        },
+        {
+          "command": "claudeStudio.upload.download",
+          "when": "!explorerResourceIsFolder && claudeStudio.hasUploadConfig",
+          "group": "claudeStudio@2"
+        },
+        {
+          "command": "claudeStudio.upload.compare",
+          "when": "!explorerResourceIsFolder && claudeStudio.hasUploadConfig",
+          "group": "claudeStudio@3"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claudeStudio",
+          "title": "Claude Studio",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "claudeStudio": [
+        {
+          "id": "claudeStudio.changes",
+          "name": "Changes",
+          "icon": "media/activity.svg"
+        },
+        {
+          "id": "claudeStudio.uploads",
+          "name": "Uploads"
+        },
+        {
+          "id": "claudeStudio.usage",
+          "name": "Usage"
+        },
+        {
+          "id": "claudeStudio.skills",
+          "name": "Skills"
+        },
+        {
+          "id": "claudeStudio.notifications",
+          "name": "Notifications",
+          "visibility": "collapsed"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "claudeStudio.changes",
+        "contents": "Files Claude edits will show up here, grouped by task, with diff and undo.\n[$(bookmark) Create Checkpoint](command:claudeStudio.changes.checkpoint)\nTip: create a checkpoint before a big task so you can undo everything in one click.\n[$(info) About Claude Studio by PM](command:claudeStudio.about)"
+      },
+      {
+        "view": "claudeStudio.uploads",
+        "contents": "Upload files to your server over SFTP or FTP. Claude Studio reads `.vscode/sftp.json` (same format as the SFTP extension).\n[$(add) Set Up Server](command:claudeStudio.upload.createConfig)",
+        "when": "!claudeStudio.hasUploadConfig"
+      }
+    ],
+    "configuration": {
+      "title": "Claude Studio by PM",
+      "properties": {
+        "claudeStudio.autoOpen.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Open files automatically when the Claude agent edits or creates them."
+        },
+        "claudeStudio.autoOpen.openNewFiles": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Also open new files Claude creates."
+        },
+        "claudeStudio.autoOpen.preserveFocus": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Keep the cursor in the Claude chat while files open."
+        },
+        "claudeStudio.autoOpen.preview": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Open as a preview tab (each new file replaces the last one)."
+        },
+        "claudeStudio.autoOpen.highlightChanges": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Flash the changed lines when a file opens."
+        },
+        "claudeStudio.autoOpen.highlightDurationMs": {
+          "type": "number",
+          "default": 4000,
+          "markdownDescription": "How long the flash lasts (milliseconds).",
+          "minimum": 500,
+          "maximum": 30000
+        },
+        "claudeStudio.autoOpen.scrollToChange": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Scroll to the first changed line."
+        },
+        "claudeStudio.autoOpen.keepMarkersUntilReviewed": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Keep a green bar beside changed lines until you review the file (open its diff, edit it, or mark it reviewed)."
+        },
+        "claudeStudio.autoOpen.maxOpenTabs": {
+          "type": "number",
+          "default": 0,
+          "markdownDescription": "Close older tabs Claude Studio opened when there are more than this many. `0` = no limit.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "claudeStudio.autoOpen.formatAfterEdit": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Run your formatter on files Claude edits, then save them."
+        },
+        "claudeStudio.autoOpen.debounceMs": {
+          "type": "number",
+          "default": 300,
+          "markdownDescription": "Wait this long after a change before handling it, so rapid writes are grouped.",
+          "minimum": 50,
+          "maximum": 5000
+        },
+        "claudeStudio.autoOpen.maxFilesPerBurst": {
+          "type": "number",
+          "default": 5,
+          "markdownDescription": "If more files than this change at once (git checkout, composer/npm install, builds), they are ignored.",
+          "minimum": 1,
+          "maximum": 200
+        },
+        "claudeStudio.autoOpen.exclude": {
+          "type": "array",
+          "default": [
+            "**/.git/**",
+            "**/node_modules/**",
+            "**/vendor/**",
+            "**/writable/**",
+            "**/storage/**",
+            "**/application/cache/**",
+            "**/application/logs/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/*.log",
+            "**/*.lock",
+            "**/.claude/**",
+            "**/.vscode/**"
+          ],
+          "markdownDescription": "Files Claude Studio never tracks or opens (glob patterns).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "claudeStudio.changes.clickOpensDiff": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Clicking a file in the Changes panel shows the before/after diff (instead of just opening the file)."
+        },
+        "claudeStudio.notifications.taskFinished": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show a notification when Claude finishes a task."
+        },
+        "claudeStudio.notifications.finishedAfterSeconds": {
+          "type": "number",
+          "default": 8,
+          "markdownDescription": "A task counts as finished when Claude hasn't changed any file for this many seconds.",
+          "minimum": 2,
+          "maximum": 300
+        },
+        "claudeStudio.notifications.toasts": {
+          "type": "string",
+          "default": "all",
+          "markdownDescription": "Which notifications pop up. All of them are always kept in the Notifications panel.",
+          "enum": [
+            "all",
+            "important",
+            "errors",
+            "none"
+          ],
+          "enumDescriptions": [
+            "Every notification",
+            "Success, warnings and errors",
+            "Only errors",
+            "Never pop up (panel only)"
+          ]
+        },
+        "claudeStudio.notifications.doNotDisturb": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "No pop-ups and no sounds. Notifications are still saved in the panel."
+        },
+        "claudeStudio.sound.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Play sounds for notifications."
+        },
+        "claudeStudio.sound.volume": {
+          "type": "number",
+          "default": 70,
+          "markdownDescription": "Sound volume (0–100).",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "claudeStudio.sound.taskFinished": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **Claude finished a task**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `chime`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.sound.uploadSuccess": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **an upload finished**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `none`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.sound.uploadFailed": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **an upload failed**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `error`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.sound.lintError": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **a PHP syntax error is found**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `error`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.sound.budgetAlert": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **a budget alert fires**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `alert`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.sound.rateLimitAlert": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **usage nears your plan limit**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `alert`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.sound.skillInstalled": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Sound when **a skill is installed**. Use `chime`, `success`, `error`, `alert`, `pop`, `bell`, `none`, or the full path to your own `.wav` / `.mp3` file. Easiest: run **Claude Studio: Change Notification Sounds…**. Default: `pop`.",
+          "scope": "machine-overridable"
+        },
+        "claudeStudio.php.lintAfterClaudeEdit": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Run `php -l` on every PHP file Claude edits and show syntax errors in the Problems panel."
+        },
+        "claudeStudio.php.executablePath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to `php` / `php.exe` (for example `C:\\\\xampp\\\\php\\\\php.exe`). Empty = use `php` from PATH.",
+          "scope": "machine"
+        },
+        "claudeStudio.upload.claudeEdits": {
+          "type": "string",
+          "default": "auto",
+          "markdownDescription": "What to do with files Claude edits when the project has a `.vscode/sftp.json`.",
+          "enum": [
+            "auto",
+            "afterTask",
+            "ask",
+            "off"
+          ],
+          "enumDescriptions": [
+            "Upload each file as soon as Claude finishes writing it",
+            "Upload all files together when Claude finishes the task",
+            "Show an Upload button in the 'Claude finished' notification",
+            "Never upload Claude's edits automatically"
+          ]
+        },
+        "claudeStudio.upload.confirmProfiles": {
+          "type": "array",
+          "default": [
+            "prod",
+            "production",
+            "live"
+          ],
+          "markdownDescription": "Profiles (or server names containing these words) that always ask before uploading.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "claudeStudio.upload.blockPhpErrors": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Don't upload a PHP file that has a syntax error."
+        },
+        "claudeStudio.upload.uploadAfterRevert": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "After undoing Claude's changes, upload the restored files too."
+        },
+        "claudeStudio.upload.notifyOnSuccess": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show a notification after every successful upload (otherwise only the status bar shows it)."
+        },
+        "claudeStudio.upload.allowSelfSignedCertificates": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "FTPS only: accept self-signed TLS certificates. Leave off unless your host requires it.",
+          "scope": "machine"
+        },
+        "claudeStudio.usage.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Track Claude Code token usage and cost from the local logs."
+        },
+        "claudeStudio.usage.statusBar": {
+          "type": "string",
+          "default": "both",
+          "markdownDescription": "What the usage status bar item shows.",
+          "enum": [
+            "both",
+            "percent",
+            "cost",
+            "off"
+          ]
+        },
+        "claudeStudio.usage.showPlanLimits": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Show 5-hour / 7-day plan usage. Sends a tiny 1-token request with your Claude Code login every few minutes while you work.",
+          "scope": "machine"
+        },
+        "claudeStudio.usage.planLimitsIntervalSeconds": {
+          "type": "number",
+          "default": 300,
+          "markdownDescription": "How often plan usage is checked while you are working (seconds).",
+          "minimum": 60,
+          "maximum": 3600,
+          "scope": "machine"
+        },
+        "claudeStudio.usage.planLimitsModel": {
+          "type": "string",
+          "default": "claude-haiku-5-5",
+          "markdownDescription": "Model used for the 1-token plan usage check.",
+          "scope": "machine"
+        },
+        "claudeStudio.usage.credentialsPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Custom path to Claude Code's `.credentials.json`. Empty = `~/.claude/.credentials.json` (or the macOS Keychain).",
+          "scope": "machine"
+        },
+        "claudeStudio.usage.projectsDirectory": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Custom path to Claude Code's `projects` log folder. Empty = `~/.claude/projects`.",
+          "scope": "machine"
+        },
+        "claudeStudio.usage.refreshSeconds": {
+          "type": "number",
+          "default": 30,
+          "markdownDescription": "How often local usage is re-read (seconds).",
+          "minimum": 15,
+          "maximum": 600
+        },
+        "claudeStudio.usage.dailyBudget": {
+          "type": "number",
+          "default": 0,
+          "markdownDescription": "Alert when today's estimated cost reaches 80% and 100% of this amount (USD). `0` = off.",
+          "minimum": 0
+        },
+        "claudeStudio.usage.weeklyBudget": {
+          "type": "number",
+          "default": 0,
+          "markdownDescription": "Alert when the last 7 days' estimated cost reaches 80% and 100% of this amount (USD). `0` = off.",
+          "minimum": 0
+        },
+        "claudeStudio.usage.limitAlertPercent": {
+          "type": "number",
+          "default": 80,
+          "markdownDescription": "Alert when 5h or 7d plan usage reaches this percent.",
+          "minimum": 10,
+          "maximum": 100
+        },
+        "claudeStudio.usage.pricing": {
+          "type": "object",
+          "default": {},
+          "markdownDescription": "Override prices (USD per million tokens) per model, e.g. `{ \"opus-5-5\": { \"input\": 4, \"output\": 20, \"cacheRead\": 0.2, \"cacheWrite5m\": 5, \"cacheWrite1h\": 8 } }`."
+        },
+        "claudeStudio.skills.sources": {
+          "type": "array",
+          "default": [
+            {
+              "name": "Anthropic official skills",
+              "type": "github",
+              "repo": "anthropics/skills",
+              "path": "skills"
+            }
+          ],
+          "markdownDescription": "Where to browse skills from. Add sources with **Claude Studio: Add Skill Source…**.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "github",
+                  "url",
+                  "folder"
+                ]
+              },
+              "repo": {
+                "type": "string"
+              },
+              "branch": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "folder": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ]
+          },
+          "scope": "application"
+        },
+        "claudeStudio.liveReload.enabled": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Reload your local site in the browser after PHP/CSS/JS changes. Run **Claude Studio: Copy Live Reload Script Tag** and paste it into your dev layout."
+        },
+        "claudeStudio.liveReload.port": {
+          "type": "number",
+          "default": 35730,
+          "markdownDescription": "Port for the live reload server (listens on 127.0.0.1 only).",
+          "minimum": 1024,
+          "maximum": 65535
+        },
+        "claudeStudio.liveReload.watch": {
+          "type": "array",
+          "default": [
+            "**/*.{php,html,css,js}"
+          ],
+          "markdownDescription": "Files that trigger a reload.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "claudeStudio.liveReload.delayMs": {
+          "type": "number",
+          "default": 400,
+          "markdownDescription": "Wait this long after the last change before reloading.",
+          "minimum": 0,
+          "maximum": 5000
+        }
+      }
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": "**/.vscode/sftp.json",
+        "url": "./schemas/sftp.schema.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "esbuild src/extension.js --bundle --platform=node --target=node18 --format=cjs --main-fields=module,main --external:vscode --external:cpu-features --external:*.node --minify --keep-names --sourcemap=external --legal-comments=none --outfile=dist/extension.js && node scripts/notices.js",
+    "vscode:prepublish": "npm run build",
+    "test": "node test/run.js && node test/activate.js && npm run build && node test/activate.js dist && node test/livereload.js && node test/sftp-integration.js && node test/ftp-integration.js",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "basic-ftp": "^6.2.3",
+    "fflate": "^0.8.3",
+    "jsonc-parser": "^3.3.1",
+    "ssh2-sftp-client": "^12.1.1"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "ftp-srv": "^4.6.3",
+    "ovsx": "^1.3.0"
+  }
+}

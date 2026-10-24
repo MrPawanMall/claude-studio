@@ -1,0 +1,42 @@
+name: Release
+
+# Push a tag like v2.0.1 to build, create a GitHub release with the .vsix,
+# and publish to the VS Code Marketplace and Open VSX (if their tokens are set).
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - name: Check tag matches package.json version
+        run: |
+          V=$(node -p "require('./package.json').version")
+          [ "v$V" = "${GITHUB_REF_NAME}" ] || { echo "Tag ${GITHUB_REF_NAME} does not match version $V"; exit 1; }
+      - name: Package
+        run: echo "VSIX=claude-studio-$(node -p "require('./package.json').version").vsix" >> $GITHUB_ENV && npx vsce package --out "claude-studio-$(node -p "require('./package.json').version").vsix"
+      - name: GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.VSIX }}
+          body_path: RELEASE_NOTES.md
+      - name: Publish to VS Code Marketplace
+        if: env.VSCE_PAT != ''
+        run: npx vsce publish --packagePath "$VSIX"
+      - name: Publish to Open VSX (Antigravity, Cursor, VSCodium)
+        if: env.OVSX_PAT != ''
+        run: npx ovsx publish "$VSIX" -p "$OVSX_PAT"
