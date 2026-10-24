@@ -11,6 +11,7 @@ const AUTHOR = {
   email: 'pawan.webmaster@gmail.com',
   mobile: '8826809995',
   github: 'https://github.com/MrPawanMall',
+  extensionPage: 'https://webdevservices.in/claude-studio-vs-code-extension/',
 };
 
 const PARTNER = {
@@ -101,9 +102,11 @@ function open(context) {
       <dt>Plugin Website</dt><dd>${link(host(AUTHOR.pluginWebsite), AUTHOR.pluginWebsite)}</dd>
       <dt>Email</dt><dd>${link(AUTHOR.email, 'mailto:' + AUTHOR.email)}</dd>
       <dt>Mobile</dt><dd>${link(AUTHOR.mobile, 'tel:' + AUTHOR.mobile)}</dd>
+      <dt>Extension Page</dt><dd>${link('webdevservices.in/claude-studio-vs-code-extension', AUTHOR.extensionPage)}</dd>
       <dt>GitHub</dt><dd>${link('github.com/MrPawanMall', AUTHOR.github)}</dd>
     </dl>
     <div class="actions">
+      <a class="btn" data-href="${AUTHOR.extensionPage}">Extension page</a>
       <a class="btn secondary" data-href="${AUTHOR.github}/claude-studio">Source code</a>
       <a class="btn secondary" data-href="${AUTHOR.github}/claude-studio/issues">Report an issue</a>
     </div>

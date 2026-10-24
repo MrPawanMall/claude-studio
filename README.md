@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="media/icon.png" width="128" height="128" alt="Claude Studio by PM">
+  <a href="https://webdevservices.in/claude-studio-vs-code-extension/"><img src="media/banner.png" alt="Claude Studio by PM — the all-in-one companion for the Claude agent"></a>
 </p>
 
 <h1 align="center">Claude Studio by PM</h1>
@@ -13,6 +13,12 @@
   <a href="https://github.com/MrPawanMall/claude-studio/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/MrPawanMall/claude-studio?label=release"></a>
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue"></a>
   <a href="https://www.webdevservices.in/"><img alt="By WebDevServices" src="https://img.shields.io/badge/by-webdevservices.in-orange"></a>
+</p>
+
+<p align="center">
+  <b><a href="https://webdevservices.in/claude-studio-vs-code-extension/">🌐 Extension page</a></b> ·
+  <b><a href="https://github.com/MrPawanMall/claude-studio/releases/latest">⬇ Download</a></b> ·
+  <b><a href="https://webdevservices.in/extensions/">More extensions by PM</a></b>
 </p>
 
 ---
@@ -77,6 +83,8 @@ When the Claude agent works inside your editor it changes files on disk — but 
 - Built-in About page with author details, partner and tools.
 
 ## Install
+
+Full guide with screenshots and FAQ on the **[Claude Studio extension page](https://webdevservices.in/claude-studio-vs-code-extension/)**.
 
 - **VS Code Marketplace** — search for *Claude Studio by PM* (publisher `pawanmall`).
 - **Open VSX** (used by **Antigravity**, Cursor, VSCodium) — search for *Claude Studio by PM*.
@@ -178,6 +186,7 @@ See [SECURITY.md](SECURITY.md) to report a vulnerability.
 | **Author** | Pawan Mall |
 | **Website** | [www.pawanmall.in](https://www.pawanmall.in/) |
 | **Plugin Website** | [www.webdevservices.in](https://www.webdevservices.in/) |
+| **Extension Page** | [webdevservices.in/claude-studio-vs-code-extension](https://webdevservices.in/claude-studio-vs-code-extension/) |
 | **Email** | [pawan.webmaster@gmail.com](mailto:pawan.webmaster@gmail.com) |
 | **Mobile** | [8826809995](tel:8826809995) |
 | **GitHub** | [github.com/MrPawanMall](https://github.com/MrPawanMall) |
