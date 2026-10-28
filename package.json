@@ -2,7 +2,7 @@
   "name": "claude-studio",
   "displayName": "Claude Studio by PM",
   "description": "All-in-one companion for the Claude agent: auto-open edited files, review diffs, undo tasks, built-in SFTP/FTP upload, usage & cost tracker, skills manager and notifications with sounds.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "pawanmall",
   "author": {
     "name": "Pawan Mall",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 — 2026-10-29
+
+- Published on Open VSX (Antigravity, Cursor, VSCodium).
+- Extension homepage, README and About page now link to the extension page on webdevservices.in.
+- New banner image in the README.
+
 ## 2.0.0 — 2026-10-24
 
 Renamed from **Claude Auto Open** to **Claude Studio by PM** and rebuilt as an all-in-one companion for the Claude agent.

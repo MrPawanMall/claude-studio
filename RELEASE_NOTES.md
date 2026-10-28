@@ -1,8 +1,8 @@
-## Claude Studio by PM 2.0.0
+## Claude Studio by PM 2.0.1
 
 The all-in-one companion for the Claude agent in **Antigravity, VS Code and Cursor** (previously *Claude Auto Open*).
 
-**Install:** download `claude-studio-2.0.0.vsix` below → Extensions panel → `···` → **Install from VSIX…**
+**Install:** download `claude-studio-2.0.1.vsix` below → Extensions panel → `···` → **Install from VSIX…**
 
 ### What's inside
 - 👁 Auto-open every file Claude edits, with change highlights and review markers
