@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2 — 2026-10-29
+
+- Extension ID is now `pawanmall.claude-studio-by-pm` in every store (the name `claude-studio` was already taken on the VS Code Marketplace). The display name is still **Claude Studio by PM**.
+- Published on the VS Code Marketplace.
+
 ## 2.0.1 — 2026-10-29
 
 - Published on Open VSX (Antigravity, Cursor, VSCodium).

@@ -86,8 +86,8 @@ When the Claude agent works inside your editor it changes files on disk — but 
 
 Full guide with screenshots and FAQ on the **[Claude Studio extension page](https://webdevservices.in/claude-studio-vs-code-extension/)**.
 
-- **VS Code Marketplace** — search for *Claude Studio by PM* (publisher `pawanmall`).
-- **Open VSX** (used by **Antigravity**, Cursor, VSCodium) — search for *Claude Studio by PM*.
+- **VS Code Marketplace** — search for *Claude Studio by PM* (ID `pawanmall.claude-studio-by-pm`).
+- **Open VSX** (used by **Antigravity**, Cursor, VSCodium) — search for *Claude Studio by PM* (ID `pawanmall.claude-studio-by-pm`).
 - **Manual** — download the `.vsix` from [Releases](https://github.com/MrPawanMall/claude-studio/releases), then in the Extensions panel open the `···` menu → **Install from VSIX…**.
 
 ## Quick start

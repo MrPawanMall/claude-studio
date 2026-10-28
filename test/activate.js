@@ -59,7 +59,7 @@ const context = {
   globalState: memento(),
   workspaceState: memento(),
   secrets: { get: async () => undefined, store: async () => {}, delete: async () => {} },
-  extension: { id: 'pawanmall.claude-studio', packageJSON: pkg },
+  extension: { id: 'pawanmall.claude-studio-by-pm', packageJSON: pkg },
 };
 
 require(process.argv[2] === 'dist' ? '../dist/extension' : '../src/extension').activate(context);

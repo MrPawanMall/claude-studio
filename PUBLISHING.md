@@ -32,7 +32,7 @@ Antigravity, Cursor and VSCodium install extensions from **Open VSX**; VS Code i
 npm ci --ignore-scripts
 npx vsce package
 npx vsce publish -p <VSCE_PAT>
-npx ovsx publish claude-studio-2.0.0.vsix -p <OVSX_PAT>
+npx ovsx publish claude-studio-<version>.vsix -p <OVSX_PAT>
 ```
 
 ## Notes for review
